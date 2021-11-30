@@ -1,1 +1,63 @@
+class mergeSortClass
+{
+private:
+    /* data */
+public:
+    int mergeSort(int *array, int low, int high)
+        {
+            int midPoint;
+            if (low < high)
+                {
+                    midPoint = (low + high)/2;
+                    mergeSort(array, low, midPoint);
+                    mergeSort(array, midPoint + 1, high);
+                    merge(array, low, high, midPoint);
+                }
+            
+        }
+    void merge(int *array, int low, int high, int midPoint)
+        {
+            int a, b, c, lowTwo, highTwo;
+            lowTwo = midPoint - low + 1;
+            highTwo = high - midPoint;
+            int leftArray[lowTwo], rightArray[highTwo];
+            for (int i = 0; i < lowTwo; i++)
+                {
+                    leftArray[i] = array[low + i];
+                }
+            for (int j = 0; j < highTwo; j++)
+                {
+                    rightArray[j] = array[j + midPoint + 1];
+                }
+            a = 0, b = 0, c = low;
+            while (a < lowTwo && b < highTwo)
+                {
+                    if (leftArray[a] <= rightArray[b])
+                        {
+                            array[c] = leftArray[a];
+                            a++;
+                        }
+                    else
+                        {
+                            array[c] = rightArray[b];
+                            b++;
+                        }
+                    c++;
+                }
+            while (a < lowTwo)
+            {
+                array[c] = leftArray[a];
+                a++,c++;
+            }
+            
+            while (b < highTwo)
+            {
+                array[c] = rightArray[b];
+                b++,c++;
+            }
+
+            
+        }
+};
+
 
