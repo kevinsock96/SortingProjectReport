@@ -2,8 +2,7 @@
 #include <bits/stdc++.h>
 #include <chrono>
 
-
-//Sorting function using the insertion sort algorithm
+//Sorting function using the insertion sort algorithm - int
 void insertionSort(int arr[], int n) {
 	int i, k, j;
 	for (i = 1; i < n; i++) {
@@ -19,8 +18,32 @@ void insertionSort(int arr[], int n) {
 	}
 }
 
-//Function created to print out and test the array
+//Sorting function using the insertion sort algorithm - float
+void insertionSort(double arr[], double n) {
+	int i, k, j;
+	for (i = 1; i < n; i++) {
+		k = arr[i];
+		j = i - 1;
+
+		//Moves elements greater than k to a position ahead of the current
+		while (j >= 0 && arr[j] > k) {
+			arr[j + 1] = arr[j];
+			j = j - 1;
+		}
+		arr[j + 1] = k;
+	}
+}
+
+//Function created to print out and test the array - int
 void printArray(int arr[], int n) {
+	for (int i = 0; i < n; i++) {
+		std::cout << arr[i] << " ";
+	}
+	std::cout << std::endl << std::endl;
+}
+
+//Function created to print out and test the array - float
+void printArray(double arr[], double n) {
 	for (int i = 0; i < n; i++) {
 		std::cout << arr[i] << " ";
 	}
