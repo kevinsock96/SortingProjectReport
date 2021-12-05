@@ -47,11 +47,59 @@ void printArray(int arr[], int size) {
     std::cout << std::endl;
 }
 
-// Driver program to implement above functions
+
+//FUNCTION OVERLOADING: DOUBLE
+
+//Function to swap two elements
+void swap(double* a, double* b) {
+    double t = *a;
+    *a = *b;
+    *b = t;
+}
+
+//Function to take the last element as pivot, places it in the right spot, places all smaller to the left and all greater to the right of the pivot
+int partition (double arr[], int low, int high) {
+
+    int pivot = arr[high];    // pivot
+    int i = (low - 1);  // Index of smaller element
+
+    for (int j = low; j <= high- 1; j++) {
+        // If current element is smaller than or equal to pivot
+        if (arr[j] <= pivot) {
+            i++;    // increment index of smaller element
+            swap(&arr[i], &arr[j]);
+        }
+    }
+    swap(&arr[i + 1], &arr[high]);
+    return (i + 1);
+}
+
+// The main function that implements QuickSort
+void quickSort(double arr[], int low, int high) {
+    if (low < high) {
+        // pi is partitioning index, arr[p] is now at right place
+        int pi = partition(arr, low, high);
+
+        // Separately sort elements before partition and after partition
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+    }
+}
+
+// Function to test/print the array
+void printArray(double arr[], int size) {
+    int i;
+    std::cout << "Sorted Array: ";
+    for (i = 0; i < size; i++)
+        std::cout << arr[i] << " ";
+    std::cout << std::endl;
+}
+
+//Main function to implement above functions
 int main() {
 
     //Completely Unsorted Array
-    int arr1[] = {10, 7, 2, 9, 1, 5, 3, 6, 4, 8};
+    double arr1[] = {10.5, 7.2, 2.7, 9.6, 1.3, 5.7, 3.8, 6.2, 4.0, 8.3};
 
     //Completely Sorted Array
     int arr2[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
@@ -73,32 +121,35 @@ int main() {
     quickSort(arr1, 0, n1-1);
     auto stop1 = std::chrono::high_resolution_clock::now();
     std::cout << "Completely Unsorted Array" << std::endl;
+    std::cout << std::chrono::duration_cast<std::chrono::nanoseconds>(stop1 - start1).count() << " ns" << std::endl;
     printArray(arr1, n1);
-    std::cout << std::chrono::duration_cast<std::chrono::nanoseconds>(stop1 - start1).count() << " ns" << std::endl << std::endl;
+    std::cout << std::endl;
 
     //Array 2
     auto start2 = std::chrono::high_resolution_clock::now();
     quickSort(arr2, 0, n2-1);
     auto stop2 = std::chrono::high_resolution_clock::now();
     std::cout << "Completely Sorted Array" << std::endl;
+    std::cout << std::chrono::duration_cast<std::chrono::nanoseconds>(stop2 - start2).count() << " ns" << std::endl;
     printArray(arr2, n2);
-    std::cout << std::chrono::duration_cast<std::chrono::nanoseconds>(stop2 - start2).count() << " ns" << std::endl << std::endl;
+    std::cout << std::endl;
 
     //Array 3
     auto start3 = std::chrono::high_resolution_clock::now();
     quickSort(arr3, 0, n3-1);
     auto stop3 = std::chrono::high_resolution_clock::now();
     std::cout << "Completely Reverse Sorted Array" << std::endl;
+    std::cout << std::chrono::duration_cast<std::chrono::nanoseconds>(stop3 - start3).count() << " ns" << std::endl;
     printArray(arr3, n3);
-    std::cout << std::chrono::duration_cast<std::chrono::nanoseconds>(stop3 - start3).count() << " ns" << std::endl << std::endl;
+    std::cout << std::endl;
 
     //Array 4
     auto start4 = std::chrono::high_resolution_clock::now();
     quickSort(arr4, 0, n4-1);
     auto stop4 = std::chrono::high_resolution_clock::now();
     std::cout << "Partially Sorted Array" << std::endl;
+    std::cout << std::chrono::duration_cast<std::chrono::nanoseconds>(stop4 - start4).count() << " ns" << std::endl;
     printArray(arr4, n4);
-    std::cout << std::chrono::duration_cast<std::chrono::nanoseconds>(stop4 - start4).count() << " ns" << std::endl << std::endl;
 
     return 0;
 }
