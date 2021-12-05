@@ -1,26 +1,34 @@
+#include <iostream>
+
+
 class mergeSortClass
 {
 private:
     /* data */
 public:
+    //This is going to take our array. int low is going to be used to keep track of the left most index of the array of the mergeSort. high is to keep track of the right most index of the mergeSort
     int mergeSort(int *array, int low, int high)
         {
             int midPoint;
             if (low < high)
                 {
                     midPoint = (low + high)/2;
+                    //Recursively calls the merge.
                     mergeSort(array, low, midPoint);
                     mergeSort(array, midPoint + 1, high);
                     merge(array, low, high, midPoint);
                 }
             
         }
+    // this is going to be the function actually doing the sorting. 
     void merge(int *array, int low, int high, int midPoint)
         {
+            //we create lowTwo to create the size of the left array, and highTwo to create the size of the right array.
             int a, b, c, lowTwo, highTwo;
             lowTwo = midPoint - low + 1;
             highTwo = high - midPoint;
             int leftArray[lowTwo], rightArray[highTwo];
+            //puts the left side into left side array, right side into right side array. fillr up 
             for (int i = 0; i < lowTwo; i++)
                 {
                     leftArray[i] = array[low + i];
@@ -30,6 +38,7 @@ public:
                     rightArray[j] = array[j + midPoint + 1];
                 }
             a = 0, b = 0, c = low;
+            //comparison function. will compare the values in the left array to the right array. Does the checks, adds it to our array.
             while (a < lowTwo && b < highTwo)
                 {
                     if (leftArray[a] <= rightArray[b])
@@ -44,6 +53,7 @@ public:
                         }
                     c++;
                 }
+            //Makes sure there is nothing leftover after the merge. If there is, we put it back into our array at the current end position.
             while (a < lowTwo)
             {
                 array[c] = leftArray[a];
@@ -55,9 +65,64 @@ public:
                 array[c] = rightArray[b];
                 b++,c++;
             }
-
+        }
+        //overloading our function to take different data types.
+    double mergeSort(double *array, int low, int high)
+        {
+            int midPoint;
+            if (low < high)
+                {
+                    midPoint = (low + high)/2;
+                    //Recursively calls the merge.
+                    mergeSort(array, low, midPoint);
+                    mergeSort(array, midPoint + 1, high);
+                    merge(array, low, high, midPoint);
+                }
+        }
+    void merge(double *array, int low, int high, int midPoint)
+        {
+            //we create lowTwo to create the size of the left array, and highTwo to create the size of the right array.
+            int a, b, c, lowTwo, highTwo;
+            lowTwo = midPoint - low + 1;
+            highTwo = high - midPoint;
+            double leftArray[lowTwo], rightArray[highTwo];
+            //puts the left side into left side array, right side into right side array. fillr up 
+            for (int i = 0; i < lowTwo; i++)
+                {
+                    leftArray[i] = array[low + i];
+                }
+            for (int j = 0; j < highTwo; j++)
+                {
+                    rightArray[j] = array[j + midPoint + 1];
+                }
+            a = 0, b = 0, c = low;
+            //comparison function. will compare the values in the left array to the right array. Does the checks, adds it to our array.
+            while (a < lowTwo && b < highTwo)
+                {
+                    if (leftArray[a] <= rightArray[b])
+                        {
+                            array[c] = leftArray[a];
+                            a++;
+                        }
+                    else
+                        {
+                            array[c] = rightArray[b];
+                            b++;
+                        }
+                    c++;
+                }
+            //Makes sure there is nothing leftover after the merge. If there is, we put it back into our array at the current end position.
+            while (a < lowTwo)
+            {
+                array[c] = leftArray[a];
+                a++,c++;
+            }
             
+            while (b < highTwo)
+            {
+                array[c] = rightArray[b];
+                b++,c++;
+            }
         }
 };
-
 
