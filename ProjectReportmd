@@ -22,4 +22,6 @@ Nick
 12/02 - Implemented quick sort algorithm, without time benchmarking or function overloading.
 12/03 - Implemented time benchmarking to the quick sort algorithm
 12/04 - Implemented function overloading so the quick sort algorithm can sort ints and doubles.
+12/05 - Began working on pancake sorting algorithm
+12/06 - Uploaded pancake sorting algorithm, without benchmarking or function overloading.
 
