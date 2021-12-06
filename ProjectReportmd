@@ -13,7 +13,8 @@ Matt
 11/27 - Met again to check on progress of other sorts
 12/02 - Committed first update to the Insertion Sort repository. Algorithm is functional
 12/04 - Added benchmarking to Insertion Sort repository that should be working as intended
-12/05 - Added function overloading to Insertion Sort repository that also should be working as intended. 
+12/05 - Added function overloading to Insertion Sort repository that also should be working as intended
+12/06 - Added function overloading and benchmarking to pancake sort, seems to be working as intended
 
 Nick
 ------
