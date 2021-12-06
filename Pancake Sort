@@ -1,6 +1,8 @@
 #include<iostream>
+#include <chrono>
 
-void rev(int arr[], int i) {
+//Function to reverse arrays - int
+void reverse(int arr[], int i) {
     int temp, st = 0;
     while (st < i) {
         temp = arr[st];
@@ -11,6 +13,19 @@ void rev(int arr[], int i) {
     }
 }
 
+//Function to reverse arrays - float
+void reverse(double arr[], int i) {
+    int temp, st = 0;
+    while (st < i) {
+        temp = arr[st];
+        arr[st] = arr[i];
+        arr[i] = temp;
+        st++;
+        i--;
+    }
+}
+
+//Function to find max index - int
 int maxIndex(int arr[], int n) {
     int index, i;
     for (index = 0, i = 0; i < n; ++i){
@@ -21,21 +36,89 @@ int maxIndex(int arr[], int n) {
    return index;
 }
 
+//Function to find max index - float
+int maxIndex(double arr[], double n) {
+    int index, i;
+    for (index = 0, i = 0; i < n; ++i){
+        if (arr[i] > arr[index]) {
+        index = i;
+        }
+   }
+   return index;
+}
+
+//Function to complete the pancake sort algorithm - int
 void pancakeSort(int arr[], int n) {
     for (int size = n; size > 1; size--) {
         int index = maxIndex(arr, size);\
         if (index != size-1) {
-            rev(arr, index);
-            rev(arr, size-1);
+            reverse(arr, index);
+            reverse(arr, size-1);
         }
    }
 }
 
+//Function to complete the pancake sort algorithm - float 
+void pancakeSort(double arr[], double n) {
+    for (int size = n; size > 1; size--) {
+        int index = maxIndex(arr, size);\
+        if (index != size-1) {
+            reverse(arr, index);
+            reverse(arr, size-1);
+        }
+   }
+}
+
+//Function created to print and test the array - int
+void printArray(int arr[], int n) {
+	for (int i = 0; i < n; i++) {
+		std::cout << arr[i] << " ";
+	}
+	std::cout << std::endl << std::endl;
+}
+
+//Function created to print and test the array - float
+void printArray(double arr[], double n) {
+	for (int i = 0; i < n; i++) {
+		std::cout << arr[i] << " ";
+	}
+	std::cout << std::endl << std::endl;
+}
+
 int main() {
-    int arr[] = {54, 85, 52, 25, 98, 75, 25, 11, 68};
-    int n = sizeof(arr)/sizeof(arr[0]);
-    pancakeSort(arr, n);
-    std::cout << "Sorted array: ";
-    for (int i = 0; i < n; ++i)
-    std::cout << arr[i] << " ";
+    int arr1[] = {59, 89, 73, 25, 98, 79, 85, 11, 68};
+    int n1 = sizeof(arr1)/sizeof(arr1[0]);
+    
+    int arr2[] = {54, 25, 52, 12, 98, 71, 99, 11, 78};
+    int n2 = sizeof(arr2)/sizeof(arr2[0]);
+    
+    int arr3[] = {34, 84, 51, 25, 98, 73, 45, 11, 28};
+    int n3 = sizeof(arr3)/sizeof(arr3[0]);
+    
+    int arr4[] = {45, 85, 22, 15, 98, 78, 25, 11, 58};
+    int n4 = sizeof(arr4)/sizeof(arr4[0]);
+
+    auto start1 = std::chrono::high_resolution_clock::now();
+    pancakeSort(arr1, n1);
+    auto stop1 = std::chrono::high_resolution_clock::now();
+    std::cout << std::chrono::duration_cast<std::chrono::nanoseconds>(stop1 - start1).count() << " ns" << std::endl;
+    printArray(arr1, n1);
+    
+    auto start2 = std::chrono::high_resolution_clock::now();
+    pancakeSort(arr2, n2);
+    auto stop2 = std::chrono::high_resolution_clock::now();
+    std::cout << std::chrono::duration_cast<std::chrono::nanoseconds>(stop2 - start2).count() << " ns" << std::endl;
+    printArray(arr2, n2);
+    
+    auto start3 = std::chrono::high_resolution_clock::now();
+    pancakeSort(arr3, n3);
+    auto stop3 = std::chrono::high_resolution_clock::now();
+    std::cout << std::chrono::duration_cast<std::chrono::nanoseconds>(stop3 - start3).count() << " ns" << std::endl;
+    printArray(arr3, n3);
+    
+    auto start4 = std::chrono::high_resolution_clock::now();
+    pancakeSort(arr4, n4);
+    auto stop4 = std::chrono::high_resolution_clock::now();
+    std::cout << std::chrono::duration_cast<std::chrono::nanoseconds>(stop4 - start4).count() << " ns" << std::endl;
+    printArray(arr4, n4);
 }
