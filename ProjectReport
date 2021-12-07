@@ -19,6 +19,7 @@ Matt
 12/04 - Added benchmarking to Insertion Sort repository that should be working as intended
 12/05 - Added function overloading to Insertion Sort repository that also should be working as intended
 12/06 - Added function overloading and benchmarking to pancake sort, seems to be working as intended
+12/07 - Added more to the Insertion Sort and Pancake Sort code that prints out what kind of array was sorted with the array and time.
 
 Nick
 ------
