@@ -4,29 +4,25 @@
 class mergeSortClass
 {
 private:
+    
+public:
+    //This is going to take our array. int low is going to be used to keep track of the left most index of the array of the mergeSort. high is to keep track of the right most index of the mergeSort
     double ourRandomDoubleArray[10]; //
     double ourSortedDoubleArray[20] = {1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0,11.0,12.0,13.0,14.0,15.0,16.0,17.0,18.0,19.0,20.0}; //
     int ourRandomintArray[10]; //
     int ourHalfSortedArray[20] = {5,6,7,8,9,10,11,12,13,14,15,3,15,4,2,1,22,48,24,32}; //
     int ourReverseSortedArray[10] = {10,9,8,7,6,5,4,3,2,1};
-public:
-    //This is going to take our array. int low is going to be used to keep track of the left most index of the array of the mergeSort. high is to keep track of the right most index of the mergeSort
-    int mergeSort(int *array, int low, int high)
+    void mergeSort(int *array, int low, int high)
         {
             int midPoint;
             if (low < high)
                 {
                     midPoint = (low + high)/2;
-                    auto start = std::chrono::high_resolution_clock::now();
                     //Recursively calls the merge.
                     mergeSort(array, low, midPoint);
                     mergeSort(array, midPoint + 1, high);
                     merge(array, low, high, midPoint);
-                    auto stop = std::chrono::high_resolution_clock::now();
-                    auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start);
-                    std::cout << duration.count() << " nanoseconds" << "\n";
                 }
-            
         }
     // this is going to be the function actually doing the sorting. 
     void merge(int *array, int low, int high, int midPoint)
@@ -75,9 +71,10 @@ public:
             }
         }
         //overloading our function to take different data types.
-    double mergeSort(double *array, int low, int high)
+    void mergeSort(double *array, int low, int high)
         {
             int midPoint;
+            
             if (low < high)
                 {
                     midPoint = (low + high)/2;
@@ -136,7 +133,7 @@ public:
         {
             for (int i = 0; i < 10; i++)
                 {
-                    ourRandomDoubleArray[i] = double((rand() % 11));
+                    ourRandomDoubleArray[i] = (double)(rand()) / ((double)(RAND_MAX));
                 }
             
         }
@@ -148,7 +145,61 @@ public:
                 }
             
         }
-    
+    void printArray();
 };
+    void mergeSortClass::printArray()
+        {
+            for (int i = 0; i < (sizeof(ourRandomDoubleArray)/sizeof(ourRandomDoubleArray[0])); i++)
+                {
+                    std::cout << ourRandomDoubleArray[i] << "\n";
+                }
+            
+        }
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MAIN FUNCTION
 
+
+
+
+#include <iostream>
+#include "mergeSort.hpp"
+#include <random>
+#include <chrono>
+
+int main()
+
+{
+    mergeSortClass ourMerge;
+    ourMerge.fillRandomDoubleArray();
+    auto start = std::chrono::steady_clock::now();
+    ourMerge.mergeSort(ourMerge.ourRandomDoubleArray, 0, (sizeof(ourMerge.ourRandomDoubleArray)/sizeof(ourMerge.ourRandomDoubleArray[0])));
+    auto stop = std::chrono::steady_clock::now();
+    std::cout << "The time it takes to run merge sort on a fully randomized double array is ";
+    std::cout << std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count() << " nanoseconds " << "\n";
+    
+    auto start1 = std::chrono::steady_clock::now();
+    ourMerge.mergeSort(ourMerge.ourSortedDoubleArray, 0, (sizeof(ourMerge.ourSortedDoubleArray)/sizeof(ourMerge.ourSortedDoubleArray[0])));
+    auto stop1 = std::chrono::steady_clock::now();
+    std::cout << "The time it takes to run merge sort on a sorted double array is ";
+    std::cout << std::chrono::duration_cast<std::chrono::nanoseconds>(stop1 - start1).count() << " nanoseconds " << "\n";
+    
+    ourMerge.fillRandomintArray();
+    auto start2 = std::chrono::steady_clock::now();
+    ourMerge.mergeSort(ourMerge.ourRandomintArray, 0, (sizeof(ourMerge.ourRandomintArray)/sizeof(ourMerge.ourRandomintArray[0])));
+    auto stop2 = std::chrono::steady_clock::now();
+    std::cout << "The time it takes to run merge sort on a fully randomized integer array is ";
+    std::cout << std::chrono::duration_cast<std::chrono::nanoseconds>(stop2 - start2).count() << " nanoseconds " << "\n";
+    
+    auto start3 = std::chrono::steady_clock::now();
+    ourMerge.mergeSort(ourMerge.ourHalfSortedArray, 0, (sizeof(ourMerge.ourHalfSortedArray)/sizeof(ourMerge.ourHalfSortedArray[0])));
+    auto stop3 = std::chrono::steady_clock::now();
+    std::cout << "The time it takes to run merge sort on a half sorted integer array is ";
+    std::cout << std::chrono::duration_cast<std::chrono::nanoseconds>(stop3 - start3).count() << " nanoseconds " << "\n";
+
+    auto start4 = std::chrono::steady_clock::now();
+    ourMerge.mergeSort(ourMerge.ourReverseSortedArray, 0, (sizeof(ourMerge.ourReverseSortedArray)/sizeof(ourMerge.ourReverseSortedArray[0])));
+    auto stop4 = std::chrono::steady_clock::now();
+    std::cout << "The time it takes to run merge sort on a reverse sorted integer array is ";
+    std::cout << std::chrono::duration_cast<std::chrono::nanoseconds>(stop4 - start4).count() << " nanoseconds " << "\n";
+}
 
