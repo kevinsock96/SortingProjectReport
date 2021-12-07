@@ -4,7 +4,7 @@
 
 //Sorting function using the insertion sort algorithm - int
 void insertionSort(int arr[], int n) {
-	int i, k, j;
+	int i, j, k;
 	for (i = 1; i < n; i++) {
 		k = arr[i];
 		j = i - 1;
@@ -19,8 +19,9 @@ void insertionSort(int arr[], int n) {
 }
 
 //Sorting function using the insertion sort algorithm - float
-void insertionSort(double arr[], double n) {
-	int i, k, j;
+void insertionSort(double arr[], int n) {
+	int i, j;
+	double k;
 	for (i = 1; i < n; i++) {
 		k = arr[i];
 		j = i - 1;
@@ -39,56 +40,70 @@ void printArray(int arr[], int n) {
 	for (int i = 0; i < n; i++) {
 		std::cout << arr[i] << " ";
 	}
-	std::cout << std::endl << std::endl;
+	std::cout << std::endl;
 }
 
 //Function created to print out and test the array - float
-void printArray(double arr[], double n) {
+void printArray(double arr[], int n) {
 	for (int i = 0; i < n; i++) {
 		std::cout << arr[i] << " ";
 	}
-	std::cout << std::endl << std::endl;
+	std::cout << std::endl;
 }
 
 //Main function to test all other functions 
 int main() {
-	int arr1[] = { 12, 11, 2, 9, 6 };
+	//Completely unsorted array
+	double arr1[] = {1.1, 3.3, 8.7, 10.2, 19.8, 15.6, 4.0, 9.0};
 	int n1 = sizeof(arr1) / sizeof(arr1[0]);
 	
-	int arr2[] = { 2, 18, 1, 8, 6 };
+	//Completely sorted array
+	int arr2[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 	int n2 = sizeof(arr2) / sizeof(arr2[0]);
-
-	int arr3[] = { 12, 9, 15, 3, 6 };
+	
+	//Reverse sorted array
+	int arr3[] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
 	int n3 = sizeof(arr3) / sizeof(arr3[0]);
 	
-	int arr4[] = { 10, 11, 3, 4, 6 };
+	//Partially sorted array
+	int arr4[] = { 6, 7, 8, 9, 10, 1, 2, 3, 4, 5};
 	int n4 = sizeof(arr4) / sizeof(arr4[0]);
-
-
+	
+	std::cout << "Completely Unsorted Array:" << std::endl;
 	auto start1 = std::chrono::high_resolution_clock::now();
 	insertionSort(arr1, n1);
 	auto stop1 = std::chrono::high_resolution_clock::now();
-	std::cout << std::chrono::duration_cast<std::chrono::nanoseconds>(stop1 - start1).count() << " ns" << std::endl;
 	printArray(arr1, n1);
+	std::cout << "Time Taken:" << std::endl;
+	std::cout << std::chrono::duration_cast<std::chrono::nanoseconds>(stop1 - start1).count() << " ns" << std::endl;
+	std::cout << "----------------------------------" << std::endl;
 	
+	std::cout << "Completely Sorted Array:" << std::endl;
 	auto start2 = std::chrono::high_resolution_clock::now();
 	insertionSort(arr2, n2);
 	auto stop2 = std::chrono::high_resolution_clock::now();
-	std::cout << std::chrono::duration_cast<std::chrono::nanoseconds>(stop2 - start2).count() << " ns" << std::endl;
 	printArray(arr2, n2);
+	std::cout << "Time Taken:" << std::endl;
+	std::cout << std::chrono::duration_cast<std::chrono::nanoseconds>(stop2 - start2).count() << " ns" << std::endl;
+	std::cout << "----------------------------------" << std::endl;
 	
+	std::cout << "Completely Reversed Sorted Array" << std::endl;
 	auto start3 = std::chrono::high_resolution_clock::now();
 	insertionSort(arr3, n3);
 	auto stop3 = std::chrono::high_resolution_clock::now();
-	std::cout << std::chrono::duration_cast<std::chrono::nanoseconds>(stop3 - start3).count() << " ns" << std::endl;
 	printArray(arr3, n3);
-	
-	
+	std::cout << "Time Taken:" << std::endl;
+	std::cout << std::chrono::duration_cast<std::chrono::nanoseconds>(stop3 - start3).count() << " ns" << std::endl;
+	std::cout << "----------------------------------" << std::endl;
+
+	std::cout << "Partially Sorted Array" << std::endl;
 	auto start4 = std::chrono::high_resolution_clock::now();
 	insertionSort(arr4, n4);
 	auto stop4 = std::chrono::high_resolution_clock::now();
-	std::cout << std::chrono::duration_cast<std::chrono::nanoseconds>(stop4 - start4).count() << " ns" << std::endl;
 	printArray(arr4, n4);
+	std::cout << "Time Taken:" << std::endl;
+	std::cout << std::chrono::duration_cast<std::chrono::nanoseconds>(stop4 - start4).count() << " ns" << std::endl;
+	std::cout << "----------------------------------" << std::endl;
 
 	return 0;
 }
